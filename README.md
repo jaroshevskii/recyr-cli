@@ -1,0 +1,70 @@
+# 🌋 Recyr CLI
+
+**Recyr CLI** is a lightweight, modern CLI tool for fixing broken Cyrillic text caused by incorrect encodings (e.g., Windows-1251 opened as UTF-8). Quickly convert your files back to proper UTF-8 and restore readable text.
+
+## 🚀 Features
+
+- Automatically detect and fix Windows-1251 encoded files.
+- Overwrite the original file or save to a new path.
+- Simple CLI interface powered by Swift ArgumentParser.
+- Cross-platform support (macOS, Linux).
+
+## 💻 Installation
+
+### Build from source
+
+```zsh
+git clone https://github.com/jaroshevskii/RecyrCLI.git
+cd ReCyrillic
+swift build -c release
+```
+
+### Make globally available (optional)
+
+```zsh
+sudo cp ./.build/release/RecyrCLI /usr/local/bin/recyr
+```
+
+Now you can run it from anywhere:
+
+```zsh
+recyr demo-broken.txt
+```
+
+## ⚡ Usage
+
+```zsh
+# Fix a file and overwrite it
+recyr path/to/file.txt
+
+# Fix a file and save output to a new file
+recyr path/to/file.txt --output fixed.txt
+```
+
+Example
+
+```zsh
+recyr demo-broken.txt --output demo-fixed.txt
+```
+
+After running, demo-fixed.txt will contain correctly encoded UTF-8 text.
+
+## 🧪 Demo file
+
+You can test the tool with demo-broken.txt provided in the repository. It contains intentionally broken Cyrillic text saved as Windows-1251.
+
+## ⚙️ Swift Package
+
+This project is built as a Swift Package:
+- Dependency: `swift-argument-parser`
+- Swift 6 compatible
+- Executable target: RecyrCLI
+
+## 📝 Contribution
+
+Contributions are welcome! Feel free to submit issues, feature requests, or pull requests.
+
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE.md) file for details.
