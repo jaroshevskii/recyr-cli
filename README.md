@@ -28,7 +28,7 @@ sudo cp ./.build/release/RecyrCLI /usr/local/bin/recyr
 Now you can run it from anywhere:
 
 ```zsh
-recyr demo-broken.txt
+recyr DemoBroken.txt
 ```
 
 ## ⚡ Usage
@@ -44,14 +44,14 @@ recyr path/to/file.txt --output fixed.txt
 Example
 
 ```zsh
-recyr demo-broken.txt --output demo-fixed.txt
+recyr DemoBroken.txt --output demo-fixed.txt
 ```
 
 After running, demo-fixed.txt will contain correctly encoded UTF-8 text.
 
 ## 🧪 Demo file
 
-You can test the tool with demo-broken.txt provided in the repository. It contains intentionally broken Cyrillic text saved as Windows-1251.
+You can test the tool with DemoBroken.txt provided in the repository. It contains intentionally broken Cyrillic text saved as Windows-1251.
 
 ## ⚙️ Swift Package
 
