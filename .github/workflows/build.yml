@@ -1,0 +1,95 @@
+name: Build and Release CLI
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate-build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Validate Swift build
+        run: |
+          swift build -c release
+          echo "✅ Build successful"
+          
+  build-macOS:
+    runs-on: macos-latest
+    needs: validate-build
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build macOS binary
+        run: |
+          swift build -c release
+          mkdir -p dist
+          cp .build/release/RecyrCLI dist/recyr-macos
+          
+      - name: Upload macOS binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: recyr-macos
+          path: dist/recyr-macos
+          
+  build-linux:
+    runs-on: ubuntu-latest
+    needs: validate-build
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Linux binary
+        run: |
+          swift build -c release
+          mkdir -p dist
+          cp .build/release/RecyrCLI dist/recyr-linux
+          
+      - name: Upload Linux binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: recyr-linux
+          path: dist/recyr-linux
+          
+  create-release:
+    needs: [build-macOS, build-linux]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download macOS binary
+        uses: actions/download-artifact@v4
+        with:
+          name: recyr-macos
+          path: dist
+          
+      - name: Download Linux binary
+        uses: actions/download-artifact@v4
+        with:
+          name: recyr-linux
+          path: dist
+          
+      - name: Create release archive
+        run: |
+          cd dist
+          # Create zip archive for macOS
+          zip recyr-macos.zip recyr-macos
+          # Create tar.gz archive for Linux
+          tar -czf recyr-linux.tar.gz recyr-linux
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          files: |
+            dist/recyr-macos.zip
+            dist/recyr-linux.tar.gz
