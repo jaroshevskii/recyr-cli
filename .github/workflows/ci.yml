@@ -48,7 +48,7 @@ jobs:
       - name: Build
         run: swift build
       - name: Test (with coverage)
-        run: swift test --enable-code-coverage
+        run: swift test --enable-code-coverage -Xswiftc -strict-concurrency=minimal
       - name: Coverage report
         continue-on-error: true
         run: ./scripts/coverage.sh --no-test
