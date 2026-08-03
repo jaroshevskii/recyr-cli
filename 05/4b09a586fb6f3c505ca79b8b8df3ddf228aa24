@@ -1,0 +1,23 @@
+.github/workflows/build.yml
+  s_f1d0ba81e942cb::t_b5cda693cd8b80 37
+  s_f1d0ba81e942cb::t_320629e2e50db4 23
+.github/workflows/ci.yml
+  s_f1d0ba81e942cb::t_70daa0d0434eeb 49
+  s_f1d0ba81e942cb::t_2d7bf260eabeb6 24,26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "054b09a586fb6f3c505ca79b8b8df3ddf228aa24",
+  "prompts": {},
+  "sessions": {
+    "s_f1d0ba81e942cb": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_03682cf09ffe9rf88sidZE0nqN",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
