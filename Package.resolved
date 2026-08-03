@@ -1,5 +1,5 @@
 {
-  "originHash" : "3bd61eaba29c9bad9cd21c39cbb70654f44664ba61c9c1cfd3c1ba58c078629f",
+  "originHash" : "1737f72d4baba0941f96203e363760505cacaa944f2dce03b40c4a1488b34504",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -11,12 +11,21 @@
       }
     },
     {
+      "identity" : "opencombine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpenCombine/OpenCombine.git",
+      "state" : {
+        "revision" : "8576f0d579b27020beccbccc3ea6844f3ddfc2c2",
+        "version" : "0.14.0"
+      }
+    },
+    {
       "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
-        "version" : "1.6.2"
+        "revision" : "6a52f3251125d74daf04fcbd5e6f08a75d074382",
+        "version" : "1.8.2"
       }
     },
     {
