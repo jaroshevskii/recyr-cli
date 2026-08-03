@@ -35,7 +35,6 @@ let package = Package(
       dependencies: [
         "RecyrCore",
         .product(name: "CustomDump", package: "swift-custom-dump"),
-        .product(name: "IssueReportingTestSupport", package: "xctest-dynamic-overlay"),
       ]
     ),
   ]
