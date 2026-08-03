@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    name: macOS (Swift 6.2)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift version
+        run: swift --version
+      - name: Build
+        run: swift build
+      - name: Test (with coverage)
+        run: swift test --enable-code-coverage
+      - name: Coverage report
+        continue-on-error: true
+        run: ./scripts/coverage.sh --no-test
+      - name: Upload coverage to Codecov
+        continue-on-error: true
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.lcov
+          flags: lcov
+          fail_ci_if_error: false
+
+  linux:
+    name: Linux (Swift 6.2)
+    runs-on: ubuntu-latest
+    container: swift:6.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift version
+        run: swift --version
+      - name: Build
+        run: swift build
+      - name: Test (with coverage)
+        run: swift test --enable-code-coverage
+      - name: Coverage report
+        continue-on-error: true
+        run: ./scripts/coverage.sh --no-test

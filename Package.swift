@@ -5,17 +5,38 @@ import PackageDescription
 
 let package = Package(
   name: "RecyrCLI",
+  platforms: [
+    .macOS(.v13),
+  ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.6.2")
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.6.2"),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+    .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0"),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
   ],
   targets: [
-    // Targets are the basic building blocks of a package, defining a module or a test suite.
-    // Targets can depend on other targets in this package and products from dependencies.
+    .target(
+      name: "RecyrCore",
+      dependencies: [
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+      ]
+    ),
     .executableTarget(
       name: "RecyrCLI",
       dependencies: [
-        .product(name: "ArgumentParser", package: "swift-argument-parser")
+        "RecyrCore",
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ]
     ),
-  ],
+    .testTarget(
+      name: "RecyrCoreTests",
+      dependencies: [
+        "RecyrCore",
+        .product(name: "CustomDump", package: "swift-custom-dump"),
+        .product(name: "IssueReportingTestSupport", package: "xctest-dynamic-overlay"),
+      ]
+    ),
+  ]
 )

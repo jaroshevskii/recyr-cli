@@ -1,0 +1,3 @@
+import RecyrCore
+
+FixEncoding.main()

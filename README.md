@@ -1,5 +1,10 @@
 # 🌋 Recyr CLI
 
+[![CI](https://github.com/jaroshevskii/recyr-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/jaroshevskii/recyr-cli/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/jaroshevskii/recyr-cli/branch/main/graph/badge.svg?token=)](https://codecov.io/gh/jaroshevskii/recyr-cli)
+[![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://www.swift.org)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/jaroshevskii/recyr-cli)
+
 **Recyr CLI** is a lightweight, modern CLI tool for fixing broken Cyrillic text caused by incorrect encodings (e.g., Windows-1251 opened as UTF-8). Quickly convert your files back to proper UTF-8 and restore readable text.
 
 ## 🚀 Features
