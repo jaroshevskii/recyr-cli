@@ -20,7 +20,7 @@ jobs:
       
       - name: Validate Swift build
         run: |
-          swift build -c release
+          swift build -c release -Xswiftc -strict-concurrency=minimal
           echo "✅ Build successful"
           
   build-macOS:
@@ -34,7 +34,7 @@ jobs:
       
       - name: Build macOS binary
         run: |
-          swift build -c release
+          swift build -c release -Xswiftc -strict-concurrency=minimal
           mkdir -p dist
           cp .build/release/RecyrCLI dist/recyr-macos
           
