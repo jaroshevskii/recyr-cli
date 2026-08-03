@@ -33,7 +33,7 @@ jobs:
           cp .build/release/RecyrCLI dist/recyr-macos
           
       - name: Upload macOS binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: recyr-macos
           path: dist/recyr-macos
