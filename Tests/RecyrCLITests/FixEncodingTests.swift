@@ -3,6 +3,8 @@ import CustomDump
 import Dependencies
 import Foundation
 import Testing
+import RecyrCLI
+import RecyrTestSupport
 @testable import RecyrCore
 
 @Suite("FixEncoding")

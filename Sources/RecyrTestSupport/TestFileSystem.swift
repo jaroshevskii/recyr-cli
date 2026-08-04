@@ -1,18 +1,18 @@
 import Foundation
-@testable import RecyrCore
+import RecyrCore
 
-enum TestFileError: Error, Sendable {
+public enum TestFileError: Error, Sendable {
   case missing(URL)
   case write
 }
 
-final class TestFileSystem: @unchecked Sendable {
-  var storage: [URL: Data]
-  var readError: (any Error & Sendable)?
-  var writeError: (any Error & Sendable)?
-  var forceUndecodable = false
+public final class TestFileSystem: @unchecked Sendable {
+  public var storage: [URL: Data]
+  public var readError: (any Error & Sendable)?
+  public var writeError: (any Error & Sendable)?
+  public var forceUndecodable = false
 
-  init(
+  public init(
     storage: [URL: Data] = [:],
     readError: (any Error & Sendable)? = nil,
     writeError: (any Error & Sendable)? = nil,
@@ -24,7 +24,7 @@ final class TestFileSystem: @unchecked Sendable {
     self.forceUndecodable = forceUndecodable
   }
 
-  var client: EncodingClient {
+  public var client: EncodingClient {
     EncodingClient(
       read: { [self] url in
         if let readError { throw readError }

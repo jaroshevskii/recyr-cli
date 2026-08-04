@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import RecyrCore
 
 public struct FixEncoding: ParsableCommand {
   public static let configuration = CommandConfiguration(
@@ -23,7 +24,11 @@ public struct FixEncoding: ParsableCommand {
     let inputURL = URL(fileURLWithPath: inputPath)
     let outputURL = output.map { URL(fileURLWithPath: $0) } ?? inputURL
 
-    try EncodingFixer().fix(inputURL: inputURL, outputURL: outputURL)
+    do {
+      try EncodingFixer().fix(inputURL: inputURL, outputURL: outputURL)
+    } catch let error as EncodingError {
+      throw ValidationError(error.localizedDescription)
+    }
 
     print("Encoding fixed successfully!")
     print("Saved to: \(outputURL.path)")

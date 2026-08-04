@@ -1,18 +1,21 @@
-import ArgumentParser
 import CustomDump
 import Dependencies
 import Foundation
+import RecyrTestSupport
 import Testing
 @testable import RecyrCore
 
 @Suite("EncodingFixer")
 struct EncodingFixerTests {
-  @Test func convertsCP1251DataToUTF8AtOutputURL() throws {
+  @Test
+  func convertsCP1251DataToUTF8AtOutputURL() throws {
     let input = URL(fileURLWithPath: "/in.txt")
     let output = URL(fileURLWithPath: "/out.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
 
-    try withDependencies { $0.encodingClient = fs.client } operation: {
+    try withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       try EncodingFixer().fix(inputURL: input, outputURL: output)
     }
 
@@ -20,65 +23,86 @@ struct EncodingFixerTests {
     expectNoDifference(fs.storage[input], Fixtures.cp1251Cyrillic)
   }
 
-  @Test func overwritesExistingOutputFile() throws {
+  @Test
+  func overwritesExistingOutputFile() throws {
     let input = URL(fileURLWithPath: "/in.txt")
     let output = URL(fileURLWithPath: "/out.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic, output: Data("old".utf8)])
 
-    try withDependencies { $0.encodingClient = fs.client } operation: {
+    try withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       try EncodingFixer().fix(inputURL: input, outputURL: output)
     }
 
     expectNoDifference(String(data: fs.storage[output]!, encoding: .utf8), Fixtures.utf8Text)
   }
 
-  @Test func fixesInputInPlace() throws {
+  @Test
+  func fixesInputInPlace() throws {
     let input = URL(fileURLWithPath: "/in.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
 
-    try withDependencies { $0.encodingClient = fs.client } operation: {
+    try withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       try EncodingFixer().fix(inputURL: input, outputURL: input)
     }
 
     expectNoDifference(String(data: fs.storage[input]!, encoding: .utf8), Fixtures.utf8Text)
   }
 
-  @Test func throwsWhenInputCannotBeRead() {
+  @Test
+  func throwsWhenInputCannotBeRead() {
     let input = URL(fileURLWithPath: "/missing.txt")
     let fs = TestFileSystem(storage: [:], readError: TestFileError.missing(input))
 
-    #expect(throws: ValidationError.self) {
-      try withDependencies { $0.encodingClient = fs.client } operation: {
+    withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
+      #expect(throws: EncodingError.cannotRead(input)) {
         try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
       }
     }
   }
 
-  @Test func reportsIssueAndThrowsWhenDataIsNotDecodable() {
+@Test
+  func reportsIssueAndThrowsWhenDataIsNotDecodable() throws {
     let input = URL(fileURLWithPath: "/in.txt")
     let fs = TestFileSystem(storage: [input: Data("raw".utf8)], forceUndecodable: true)
 
-    withKnownIssue {
-      #expect(throws: ValidationError.self) {
-        try withDependencies { $0.encodingClient = fs.client } operation: {
-          try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
+    withKnownIssue(
+      nil,
+      isIntermittent: false,
+      sourceLocation: #_sourceLocation,
+      {
+        withDependencies {
+          $0.encodingClient = fs.client
+        } operation: {
+          _ = #expect(throws: EncodingError.notCP1251(input)) {
+            try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
+          }
         }
       }
-    }
+    )
   }
 
-  @Test func throwsWhenWriteFails() {
+  @Test
+  func throwsWhenWriteFails() {
     let input = URL(fileURLWithPath: "/in.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic], writeError: TestFileError.write)
 
-    #expect(throws: TestFileError.self) {
-      try withDependencies { $0.encodingClient = fs.client } operation: {
+    withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
+      #expect(throws: EncodingError.cannotWrite(URL(fileURLWithPath: "/out.txt"))) {
         try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
       }
     }
   }
 
-  @Test func usesLiveFileSystem() throws {
+  @Test
+  func usesLiveFileSystem() throws {
     let dir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: dir) }
@@ -95,7 +119,8 @@ struct EncodingFixerTests {
     expectNoDifference(String(data: outputData, encoding: .utf8), Fixtures.utf8Text)
   }
 
-  @Test func defaultLiveClientIsFunctional() throws {
+  @Test
+  func defaultLiveClientIsFunctional() throws {
     let live = EncodingClientKey.liveValue
 
     expectNoDifference(

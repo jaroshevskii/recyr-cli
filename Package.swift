@@ -18,7 +18,6 @@ let package = Package(
     .target(
       name: "RecyrCore",
       dependencies: [
-        .product(name: "ArgumentParser", package: "swift-argument-parser"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
       ]
@@ -30,10 +29,24 @@ let package = Package(
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ]
     ),
+    .target(
+      name: "RecyrTestSupport",
+      dependencies: ["RecyrCore"]
+    ),
     .testTarget(
       name: "RecyrCoreTests",
       dependencies: [
         "RecyrCore",
+        "RecyrTestSupport",
+        .product(name: "CustomDump", package: "swift-custom-dump"),
+        .product(name: "IssueReportingTestSupport", package: "xctest-dynamic-overlay"),
+      ]
+    ),
+    .testTarget(
+      name: "RecyrCLITests",
+      dependencies: [
+        "RecyrCLI",
+        "RecyrTestSupport",
         .product(name: "CustomDump", package: "swift-custom-dump"),
       ]
     ),
