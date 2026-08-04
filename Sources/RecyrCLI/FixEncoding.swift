@@ -26,7 +26,7 @@ public struct FixEncoding: ParsableCommand {
 
     do {
       try EncodingFixer().fix(inputURL: inputURL, outputURL: outputURL)
-    } catch let error as EncodingError {
+    } catch {
       throw ValidationError(error.localizedDescription)
     }
 
