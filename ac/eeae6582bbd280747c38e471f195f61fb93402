@@ -1,0 +1,61 @@
+Sources/RecyrTestSupport/Fixtures.swift
+  s_dc6a51cd662a83::t_fde56d4f6c06e4 3-5
+Sources/RecyrCore/Documentation.docc/Documentation.md
+  s_dc6a51cd662a83::t_e50322c64463ba 1-30
+Sources/RecyrCore/EncodingClient.swift
+  s_dc6a51cd662a83::t_9ddae5d601d2ee 4-5,7,9,11,26,34
+  s_dc6a51cd662a83::t_cefbe5c6efb7ab 35
+  s_dc6a51cd662a83::t_a50d4545b4a411 6,8,10,12-22,27,36,42
+Sources/RecyrCore/EncodingFixer.swift
+  s_dc6a51cd662a83::t_7ad1d9c0a4edd8 13-17,19,21-28,31
+  s_dc6a51cd662a83::t_6591a20e675e75 5,11
+  s_dc6a51cd662a83::t_7dc2ee6ba6780e 6
+  s_dc6a51cd662a83::t_45587b14912d8d 9-10
+  s_dc6a51cd662a83::t_e40b8124c8489c 12
+Package.resolved
+  s_dc6a51cd662a83::t_c5206d03e3bf22 2
+Tests/RecyrCoreTests/WindowsCP1251Tests.swift
+  s_dc6a51cd662a83::t_3c07674f981344 3
+Sources/RecyrCore/EncodingError.swift
+  s_dc6a51cd662a83::t_41c680b309bdcf 1-2,4-19
+  s_dc6a51cd662a83::t_ade2b9600513ee 3
+Sources/RecyrTestSupport/TestFileSystem.swift
+  s_dc6a51cd662a83::t_7696be28db0822 4-27
+  s_dc6a51cd662a83::t_b225750cf1709e 2
+Tests/RecyrCoreTests/EncodingFixerTests.swift
+  s_dc6a51cd662a83::t_97b4f488ee672a 10
+  s_dc6a51cd662a83::t_1eda489ff091da 79-81
+  s_dc6a51cd662a83::t_3d686e78b188dc 11,16-18,27,32-34,42,46-48,56,60-63,91,95-98,104-105,122-123,140
+  s_dc6a51cd662a83::t_892762b56a9e4e 82
+  s_dc6a51cd662a83::t_60c2eecb9532ce 4
+  s_dc6a51cd662a83::t_5a821bb553fb67 69-70
+  s_dc6a51cd662a83::t_417b619d544996 74
+  s_dc6a51cd662a83::t_7432d5cd43bf31 26,41,55,90
+  s_dc6a51cd662a83::t_5466eca7770f96 83-84
+  s_dc6a51cd662a83::t_abb93ca2ec5df5 75-78,87
+Sources/RecyrCLI/FixEncoding.swift
+  s_dc6a51cd662a83::t_f44cf4cbe70582 1-36
+Tests/RecyrCLITests/FixEncodingTests.swift
+  s_dc6a51cd662a83::t_c4fd4860aa2446 3,7
+  s_dc6a51cd662a83::t_29fa2eec26ba22 6
+Package.swift
+  s_dc6a51cd662a83::t_787d098c12b8f7 42
+  s_dc6a51cd662a83::t_25b1a251bf0013 32-35,40,43-49
+  s_dc6a51cd662a83::t_03fbc9e3a0f6c8 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "aceeae6582bbd280747c38e471f195f61fb93402",
+  "prompts": {},
+  "sessions": {
+    "s_dc6a51cd662a83": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_031e4f64fffeBwIUP7O4UfaKs1",
+        "model": "qwen/qwen3.5-122b-a10b"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
