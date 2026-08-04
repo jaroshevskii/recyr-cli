@@ -1,0 +1,23 @@
+Sources/RecyrCLI/FixEncoding.swift
+  s_dc6a51cd662a83::t_a77233af85c32e 29
+.github/workflows/build.yml
+  s_dc6a51cd662a83::t_7dda89ab376abc 19,33
+.github/workflows/ci.yml
+  s_dc6a51cd662a83::t_7dda89ab376abc 20,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "e611fb788b0946e8715f3c20414671023fcd5c4f",
+  "prompts": {},
+  "sessions": {
+    "s_dc6a51cd662a83": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_031e4f64fffeBwIUP7O4UfaKs1",
+        "model": "qwen/qwen3.5-122b-a10b"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
