@@ -1,0 +1,21 @@
+.github/workflows/build.yml
+  s_dc6a51cd662a83::t_cee6cde24740e8 19,33
+.github/workflows/ci.yml
+  s_dc6a51cd662a83::t_cee6cde24740e8 20,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "aaceb38d2732025601f8277777504e5f0a586c5a",
+  "prompts": {},
+  "sessions": {
+    "s_dc6a51cd662a83": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_031e4f64fffeBwIUP7O4UfaKs1",
+        "model": "qwen/qwen3.5-122b-a10b"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
