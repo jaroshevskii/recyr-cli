@@ -39,6 +39,7 @@ let package = Package(
         "RecyrCore",
         "RecyrTestSupport",
         .product(name: "CustomDump", package: "swift-custom-dump"),
+        .product(name: "IssueReportingTestSupport", package: "xctest-dynamic-overlay"),
       ]
     ),
     .testTarget(

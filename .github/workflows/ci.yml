@@ -11,13 +11,14 @@ concurrency:
 
 jobs:
   macos:
-    name: macOS (Swift 6.2)
+    name: macOS (Swift 6.2.4)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: swift-actions/setup-swift@v2
+      - uses: swift-actions/setup-swift@v3
         with:
-          swift-version: 6.2
+          swift-version: "6.2.4"
+          skip-verify-signature: true
       - name: Swift version
         run: swift --version
       - name: Build
@@ -36,13 +37,14 @@ jobs:
           fail_ci_if_error: false
 
   linux:
-    name: Linux (Swift 6.2)
+    name: Linux (Swift 6.2.4)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: swift-actions/setup-swift@v2
+      - uses: swift-actions/setup-swift@v3
         with:
-          swift-version: 6.2
+          swift-version: "6.2.4"
+          skip-verify-signature: true
       - name: Swift version
         run: swift --version
       - name: Build
