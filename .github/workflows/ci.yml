@@ -30,7 +30,7 @@ jobs:
         run: ./scripts/coverage.sh --no-test
       - name: Upload coverage to Codecov
         continue-on-error: true
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           files: coverage.lcov
           flags: lcov
