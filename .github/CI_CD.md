@@ -1,68 +1,42 @@
 # CI/CD
 
-Automated testing, building, and releasing for RecyrCLI via GitHub Actions.
+Automated testing, building, and releasing via GitHub Actions.
 
 ## Workflows
 
-### CI (`.github/workflows/ci.yml`)
+### CI
 
-Runs on every push to `main` and every pull request. Skips for doc-only changes.
+Runs on push to `main` and on pull requests. Skips for doc-only changes and draft PRs.
 
-| Job | Runner | Swift | What it does |
-|-----|--------|-------|-------------|
-| **Linux** | `ubuntu-latest` (Docker) | 6.2, 6.1 | Build + test + coverage |
-| **macOS** | `macos-latest` | 6.2.4 | Build + test + coverage → Codecov |
+- **Linux** — build + test + coverage
+- **macOS** — build + test + coverage → Codecov
 
-- Draft PRs are skipped.
-- `.build` directory is cached per OS and Swift version.
-- Linux uses native Docker images (`swift:X-noble`) instead of `setup-swift`.
-- Concurrency group cancels in-progress runs on the same ref.
+Dependencies are cached. Concurrency groups cancel in-progress runs on the same ref.
 
-### Build and Release (`.github/workflows/build.yml`)
+### Build and Release
 
-Runs on version tags (`v*`) and manual dispatch only.
+Runs on version tags (`v*`) and manual dispatch.
 
 ```
-validate-build → build-macOS → release
+validate build → build macOS binary → create GitHub Release
 ```
 
-| Job | Runner | What it does |
-|-----|--------|-------------|
-| **validate-build** | `macos-latest` | `swift build -c release` (gate) |
-| **build-macOS** | `macos-latest` | Build binary → upload artifact |
-| **release** | `ubuntu-latest` | Download artifact → create GitHub Release |
+Release notes are auto-generated from commits.
 
-- `release` job only runs on tag pushes.
-- Release notes are auto-generated from commits.
-
-## Release process
+## Release
 
 ```bash
 git tag v1.0.0
 git push origin v1.0.0
 ```
 
-This triggers the build workflow, which builds the macOS binary and creates a GitHub Release with the binary attached.
-
-## Caching
-
-Both workflows cache the `.build` directory. Cache keys are based on:
-
-- OS (`macos-latest` / `ubuntu-latest`)
-- Swift version
-- `Package.resolved` hash
-
-If the cache is stale (dependencies changed), it restores the partial cache and re-fetches missing packages.
+This builds the macOS binary and creates a GitHub Release with the binary attached.
 
 ## Security
 
-- All actions are SHA-pinned (not tag-pinned) to prevent supply chain attacks.
-- Workflow-level `permissions: contents: read` follows least-privilege principle.
-- Only the `release` job elevates to `contents: write`.
+- Actions are SHA-pinned to prevent supply chain attacks.
+- Least-privilege permissions by default, elevated only where needed.
 
-## Dependabot (`.github/dependabot.yml`)
+## Dependabot
 
-Weekly checks for:
-
-- GitHub Actions version updates
-- Swift package dependency updates
+Weekly checks for GitHub Actions and Swift package dependency updates.
