@@ -1,0 +1,26 @@
+Sources/RecyrCore/EncodingClient.swift
+  s_7fef19212c1f02::t_fc43734cb38d64 24
+  s_7fef19212c1f02::t_4654abaf026d5c 2,7,11,25
+Package.resolved
+  s_7fef19212c1f02::t_00d92ee0c3af02 2
+Tests/RecyrCoreTests/EncodingFixerTests.swift
+  s_7fef19212c1f02::t_9d8567d6b13ed6 128
+Package.swift
+  s_7fef19212c1f02::t_7c686225a462e2 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c84a706a7ba282495612733f65caad1e2e17e180",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
