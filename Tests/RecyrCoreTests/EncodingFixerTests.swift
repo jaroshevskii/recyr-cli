@@ -128,7 +128,7 @@ struct EncodingFixerTests {
     let live = EncodingClient.live
 
     expectNoDifference(
-      live.decodeCP1251(Fixtures.cp1251Cyrillic),
+      live.decodeCP1251(data: Fixtures.cp1251Cyrillic),
       Fixtures.utf8Text
     )
 
@@ -138,7 +138,7 @@ struct EncodingFixerTests {
     let url = dir.appendingPathComponent("file.txt")
     let utf8Data = Data(Fixtures.utf8Text.utf8)
 
-    try live.write(utf8Data, url)
-    expectNoDifference(try live.read(url), utf8Data)
+    try live.write(data: utf8Data, url: url)
+    expectNoDifference(try live.read(url: url), utf8Data)
   }
 }

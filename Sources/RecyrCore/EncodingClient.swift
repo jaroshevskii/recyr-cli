@@ -6,9 +6,9 @@ import Foundation
 /// swapped for an in-memory fake during testing.
 @DependencyClient
 public struct EncodingClient: Sendable {
-  public var read: @Sendable (URL) throws -> Data
-  public var write: @Sendable (Data, URL) throws -> Void
-  public var decodeCP1251: @Sendable (Data) -> String? = { _ in nil }
+  public var read: @Sendable (_ url: URL) throws -> Data
+  public var write: @Sendable (_ data: Data, _ url: URL) throws -> Void
+  public var decodeCP1251: @Sendable (_ data: Data) -> String? = { _ in nil }
 }
 
 extension EncodingClient {

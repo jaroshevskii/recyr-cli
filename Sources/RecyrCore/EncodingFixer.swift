@@ -12,7 +12,7 @@ public struct EncodingFixer {
   public func fix(inputURL: URL, outputURL: URL) throws(EncodingError) {
     let data: Data
     do {
-      data = try client.read(inputURL)
+      data = try client.read(url: inputURL)
     } catch {
       throw EncodingError.cannotRead(inputURL)
     }
@@ -23,7 +23,7 @@ public struct EncodingFixer {
     }
 
     do {
-      try client.write(Data(decoded.utf8), outputURL)
+      try client.write(data: Data(decoded.utf8), url: outputURL)
     } catch {
       throw EncodingError.cannotWrite(outputURL)
     }
