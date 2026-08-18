@@ -33,9 +33,23 @@ extension EncodingClient {
 
 /// The ``DependencyKey`` that registers ``EncodingClient`` with `swift-dependencies`.
 public enum EncodingClientKey: DependencyKey {
-  public static var liveValue: EncodingClient {
-    EncodingClient.live
-  }
+  public static let liveValue = EncodingClient.live
+
+  /// A no-op client for previews.
+  public static let previewValue = EncodingClient.live
+
+  /// An in-memory client for tests. Throws on read/write and decodes CP1251 normally.
+  public static let testValue = EncodingClient(
+    read: { _ in
+      fatalError("EncodingClient.read is not implemented. Provide a test double.")
+    },
+    write: { _, _ in
+      fatalError("EncodingClient.write is not implemented. Provide a test double.")
+    },
+    decodeCP1251: { data in
+      String(data: data, encoding: .windowsCP1251)
+    }
+  )
 }
 
 extension DependencyValues {
