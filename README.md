@@ -1,7 +1,7 @@
 # Recyr CLI
 
 [![CI](https://github.com/jaroshevskii/recyr-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/jaroshevskii/recyr-cli/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/jaroshevskii/recyr-cli/branch/main/graph/badge.svg?token=)](https://codecov.io/gh/jaroshevskii/recyr-cli)
+[![codecov](https://codecov.io/gh/jaroshevskii/recyr-cli/branch/main/graph/badge.svg?token=40aeb9ac-e828-4be7-bf50-a60c3f002fd1)](https://codecov.io/gh/jaroshevskii/recyr-cli)
 [![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://www.swift.org)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/jaroshevskii/recyr-cli)
 

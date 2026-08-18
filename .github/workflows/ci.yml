@@ -91,6 +91,7 @@ jobs:
         continue-on-error: true
         uses: codecov/codecov-action@a99c28d3f0da835de33ff2feb2e15691c7b9641f # v7
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.lcov
           flags: lcov
           fail_ci_if_error: false
