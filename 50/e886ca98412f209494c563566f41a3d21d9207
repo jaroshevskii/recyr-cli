@@ -1,0 +1,19 @@
+Sources/RecyrCore/EncodingClient.swift
+  s_7fef19212c1f02::t_7a3ab76ae80ddc 36-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "50e886ca98412f209494c563566f41a3d21d9207",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
