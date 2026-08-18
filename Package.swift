@@ -19,6 +19,7 @@ let package = Package(
       name: "RecyrCore",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
       ]
     ),

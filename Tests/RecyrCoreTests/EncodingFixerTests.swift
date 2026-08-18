@@ -125,7 +125,7 @@ struct EncodingFixerTests {
 
   @Test
   func defaultLiveClientIsFunctional() throws {
-    let live = EncodingClientKey.liveValue
+    let live = EncodingClient.live
 
     expectNoDifference(
       live.decodeCP1251(Fixtures.cp1251Cyrillic),
