@@ -1,0 +1,21 @@
+README.md
+  s_7fef19212c1f02::t_7b697bb7ac4e47 4
+.github/workflows/ci.yml
+  s_7fef19212c1f02::t_4004797176363b 94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0de41243d68e1e67f1f11c6eecb6dd343ece76d8",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
