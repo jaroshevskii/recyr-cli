@@ -1,0 +1,39 @@
+scripts/format.sh
+  s_7fef19212c1f02::t_ac57eba7c133bb 1-29,31-36
+  s_7fef19212c1f02::t_7937daec18e00b 30
+Sources/RecyrCLI/FixEncoding.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 13-15,38
+Sources/RecyrCore/EncodingFixer.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 31
+.github/CI_CD.md
+  s_7fef19212c1f02::t_0024298995bf75 36-44
+  s_7fef19212c1f02::t_58b420d31911a5 11
+.github/workflows/ci.yml
+  s_7fef19212c1f02::t_80aad2dc09d875 27-37
+Sources/RecyrCore/EncodingClient.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 46
+Sources/RecyrCore/EncodingError.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 11,13,15,19
+Tests/RecyrCoreTests/EncodingFixerTests.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 6,70,94-95,116-118,144
+Tests/RecyrCoreTests/WindowsCP1251Tests.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 5,32
+Tests/RecyrCLITests/FixEncodingTests.swift
+  s_7fef19212c1f02::t_786bb86d76c19f 7-8,24-26,39-41,53-55,72-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c72c64db36c2e38fa85e21a51a19d1471d433e57",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
