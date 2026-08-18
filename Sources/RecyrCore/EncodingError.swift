@@ -8,11 +8,11 @@ public enum EncodingError: Error, Equatable {
 
   public var localizedDescription: String {
     switch self {
-    case let .cannotRead(url):
+    case .cannotRead(let url):
       return "Failed to read file at \(url.path): invalid path or permissions."
-    case let .notCP1251(url):
+    case .notCP1251(let url):
       return "Failed to decode file at \(url.path) as Windows-1251."
-    case let .cannotWrite(url):
+    case .cannotWrite(let url):
       return "Failed to write file at \(url.path)."
     }
   }

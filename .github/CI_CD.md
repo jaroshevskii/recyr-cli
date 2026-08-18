@@ -8,6 +8,7 @@ Automated testing, building, and releasing via GitHub Actions.
 
 Runs on push to `main` and on pull requests. Skips for doc-only changes and draft PRs.
 
+- **Format** — lint Swift files with `swift-format`
 - **Linux** — build + test + coverage
 - **macOS** — build + test + coverage → Codecov
 
@@ -31,6 +32,15 @@ git push origin v1.0.0
 ```
 
 This builds the macOS binary and creates a GitHub Release with the binary attached.
+
+## Formatting
+
+Uses `swift-format` with default settings (same as TCA).
+
+```bash
+./scripts/format.sh           # format in-place
+./scripts/format.sh --lint    # check only (CI uses this)
+```
 
 ## Security
 

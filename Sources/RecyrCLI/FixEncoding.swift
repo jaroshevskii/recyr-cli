@@ -10,7 +10,9 @@ public struct FixEncoding: ParsableCommand {
   @Argument(help: "Path to the input file.")
   var inputPath: String
 
-  @Option(name: .shortAndLong, help: "Optional output path. If not provided, the input file will be overwritten.")
+  @Option(
+    name: .shortAndLong,
+    help: "Optional output path. If not provided, the input file will be overwritten.")
   var output: String?
 
   public init() {}

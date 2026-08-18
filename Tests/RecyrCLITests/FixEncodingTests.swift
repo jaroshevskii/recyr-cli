@@ -2,9 +2,10 @@ import ArgumentParser
 import CustomDump
 import Dependencies
 import Foundation
-import Testing
 import RecyrCLI
 import RecyrTestSupport
+import Testing
+
 @testable import RecyrCore
 
 @Suite("FixEncoding")
@@ -20,7 +21,9 @@ struct FixEncodingTests {
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
     let command = FixEncoding(inputPath: input.path, output: output.path)
 
-    try withDependencies { $0.encodingClient = fs.client } operation: {
+    try withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       try command.run()
     }
 
@@ -33,7 +36,9 @@ struct FixEncodingTests {
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
     let command = FixEncoding(inputPath: input.path)
 
-    try withDependencies { $0.encodingClient = fs.client } operation: {
+    try withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       try command.run()
     }
 
@@ -45,7 +50,9 @@ struct FixEncodingTests {
     let fs = TestFileSystem(storage: [:], readError: TestFileError.missing(input))
     let command = FixEncoding(inputPath: input.path)
 
-    withDependencies { $0.encodingClient = fs.client } operation: {
+    withDependencies {
+      $0.encodingClient = fs.client
+    } operation: {
       #expect(throws: ValidationError.self) { try command.run() }
     }
   }
@@ -62,7 +69,9 @@ struct FixEncodingTests {
     defer { try? FileManager.default.removeItem(at: dir) }
     let output = dir.appendingPathComponent("demo-fixed.txt")
 
-    try withDependencies { $0.encodingClient = .live } operation: {
+    try withDependencies {
+      $0.encodingClient = .live
+    } operation: {
       try FixEncoding(inputPath: input.path, output: output.path).run()
     }
 

@@ -3,6 +3,7 @@ import Dependencies
 import Foundation
 import RecyrTestSupport
 import Testing
+
 @testable import RecyrCore
 
 @Suite("EncodingFixer")
@@ -66,7 +67,7 @@ struct EncodingFixerTests {
     }
   }
 
-@Test
+  @Test
   func reportsIssueAndThrowsWhenDataIsNotDecodable() throws {
     let input = URL(fileURLWithPath: "/in.txt")
     let fs = TestFileSystem(storage: [input: Data("raw".utf8)], forceUndecodable: true)
@@ -90,7 +91,8 @@ struct EncodingFixerTests {
   @Test
   func throwsWhenWriteFails() {
     let input = URL(fileURLWithPath: "/in.txt")
-    let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic], writeError: TestFileError.write)
+    let fs = TestFileSystem(
+      storage: [input: Fixtures.cp1251Cyrillic], writeError: TestFileError.write)
 
     withDependencies {
       $0.encodingClient = fs.client
@@ -111,7 +113,9 @@ struct EncodingFixerTests {
     let output = dir.appendingPathComponent("out.txt")
     try Fixtures.cp1251Cyrillic.write(to: input)
 
-    try withDependencies { $0.encodingClient = .live } operation: {
+    try withDependencies {
+      $0.encodingClient = .live
+    } operation: {
       try EncodingFixer().fix(inputURL: input, outputURL: output)
     }
 
