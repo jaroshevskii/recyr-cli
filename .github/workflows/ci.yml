@@ -2,25 +2,73 @@ name: CI
 
 on:
   push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE.md'
+      - '.editorconfig'
+      - '.gitignore'
   pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE.md'
+      - '.editorconfig'
+      - '.gitignore'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  linux:
+    name: Linux (Swift ${{ matrix.swift-version }})
+    if: ${{ !(github.event.pull_request.draft || false) }}
+    runs-on: ubuntu-latest
+    container: swift:${{ matrix.swift-version }}-noble
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        swift-version: ['6.2', '6.1']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Cache .build
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: .build
+          key: linux-swift${{ matrix.swift-version }}-build-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: linux-swift${{ matrix.swift-version }}-build-${{ runner.os }}-
+      - name: Build
+        run: swift build
+      - name: Test (with coverage)
+        run: swift test --enable-code-coverage
+      - name: Coverage report
+        continue-on-error: true
+        run: ./scripts/coverage.sh --no-test
+
   macos:
     name: macOS (Swift 6.2.4)
+    if: ${{ !(github.event.pull_request.draft || false) }}
     runs-on: macos-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7
-      - uses: swift-actions/setup-swift@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: swift-actions/setup-swift@d8e84bc3a450686a95474d7d6fa4a3301498debc # v3
         with:
           swift-version: "6.2.4"
           skip-verify-signature: true
       - name: Swift version
         run: swift --version
+      - name: Cache .build
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: .build
+          key: macos-swift6.2.4-build-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: macos-swift6.2.4-build-${{ runner.os }}-
       - name: Build
         run: swift build
       - name: Test (with coverage)
@@ -30,27 +78,8 @@ jobs:
         run: ./scripts/coverage.sh --no-test
       - name: Upload coverage to Codecov
         continue-on-error: true
-        uses: codecov/codecov-action@v7
+        uses: codecov/codecov-action@a99c28d3f0da835de33ff2feb2e15691c7b9641f # v7
         with:
           files: coverage.lcov
           flags: lcov
           fail_ci_if_error: false
-
-  linux:
-    name: Linux (Swift 6.2.4)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: swift-actions/setup-swift@v3
-        with:
-          swift-version: "6.2.4"
-          skip-verify-signature: true
-      - name: Swift version
-        run: swift --version
-      - name: Build
-        run: swift build
-      - name: Test (with coverage)
-        run: swift test --enable-code-coverage
-      - name: Coverage report
-        continue-on-error: true
-        run: ./scripts/coverage.sh --no-test
