@@ -1,0 +1,19 @@
+.github/CI_CD.md
+  s_7fef19212c1f02::t_6d1f11f9056603 3,7,9,11-12,14,16,18,21,24,26,33,37-38,40,42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f451506930f2534f5a8aa2b158562d860716d59c",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
