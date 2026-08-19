@@ -15,49 +15,52 @@ struct FixEncodingTests {
     _ = FixEncoding()
   }
 
-  @Test func writesOutputFile() throws {
+  @Test func writesOutputFile() async throws {
     let input = URL(fileURLWithPath: "/tmp/input.txt")
     let output = URL(fileURLWithPath: "/tmp/output.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
-    let command = FixEncoding(inputPath: input.path, output: output.path)
 
-    try withDependencies {
+    try await withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      try command.run()
+      try await FixEncoding(inputPath: input.path, output: output.path).run()
     }
 
     expectNoDifference(String(data: fs.storage[output]!, encoding: .utf8), Fixtures.utf8Text)
     expectNoDifference(fs.storage[input], Fixtures.cp1251Cyrillic)
   }
 
-  @Test func overwritesInputInPlaceWhenNoOutputProvided() throws {
+  @Test func overwritesInputInPlaceWhenNoOutputProvided() async throws {
     let input = URL(fileURLWithPath: "/tmp/input.txt")
     let fs = TestFileSystem(storage: [input: Fixtures.cp1251Cyrillic])
-    let command = FixEncoding(inputPath: input.path)
 
-    try withDependencies {
+    try await withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      try command.run()
+      try await FixEncoding(inputPath: input.path).run()
     }
 
     expectNoDifference(String(data: fs.storage[input]!, encoding: .utf8), Fixtures.utf8Text)
   }
 
-  @Test func throwsValidationErrorWhenInputCannotBeRead() {
+  @Test func throwsValidationErrorWhenInputCannotBeRead() async throws {
     let input = URL(fileURLWithPath: "/tmp/missing.txt")
     let fs = TestFileSystem(storage: [:], readError: TestFileError.missing(input))
-    let command = FixEncoding(inputPath: input.path)
 
-    withDependencies {
+    await withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      #expect(throws: ValidationError.self) { try command.run() }
+      do {
+        try await FixEncoding(inputPath: input.path).run()
+        Issue.record("Expected ValidationError")
+      } catch is ValidationError {
+      } catch {
+        Issue.record("Unexpected error: \(error)")
+      }
     }
   }
 
-  @Test func fixesCommittedDemoFile() throws {
+  @Test func fixesCommittedDemoFile() async throws {
     let repoRoot = URL(fileURLWithPath: #filePath)
       .deletingLastPathComponent()
       .deletingLastPathComponent()
@@ -69,10 +72,10 @@ struct FixEncodingTests {
     defer { try? FileManager.default.removeItem(at: dir) }
     let output = dir.appendingPathComponent("demo-fixed.txt")
 
-    try withDependencies {
+    try await withDependencies {
       $0.encodingClient = .live
     } operation: {
-      try FixEncoding(inputPath: input.path, output: output.path).run()
+      try await FixEncoding(inputPath: input.path, output: output.path).run()
     }
 
     let fixed = try String(contentsOf: output, encoding: .utf8)

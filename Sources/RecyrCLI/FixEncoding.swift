@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import RecyrCore
 
-public struct FixEncoding: ParsableCommand {
+public struct FixEncoding: AsyncParsableCommand {
   public static let configuration = CommandConfiguration(
     abstract: "Fix broken Cyrillic symbols caused by wrong encoding (e.g. Windows-1251 → UTF-8)."
   )
@@ -22,12 +22,12 @@ public struct FixEncoding: ParsableCommand {
     self.output = output
   }
 
-  public func run() throws {
+  public func run() async throws {
     let inputURL = URL(fileURLWithPath: inputPath)
     let outputURL = output.map { URL(fileURLWithPath: $0) } ?? inputURL
 
     do {
-      try EncodingFixer().fix(inputURL: inputURL, outputURL: outputURL)
+      try EncodingFixer.fix(input: inputURL, output: outputURL)
     } catch {
       throw ValidationError(error.localizedDescription)
     }

@@ -6,26 +6,27 @@ import IssueReporting
 public struct EncodingFixer {
   @Dependency(\.encodingClient) var client
 
-  public init() {}
+  init() {}
 
-  /// Reads `inputURL`, converts Windows-1251 content to UTF-8, and writes the result to `outputURL`.
-  public func fix(inputURL: URL, outputURL: URL) throws(EncodingError) {
+  /// Reads `input`, converts Windows-1251 content to UTF-8, and writes the result to `output`.
+  public static func fix(input: URL, output: URL) throws(EncodingError) {
+    let fixer = EncodingFixer()
     let data: Data
     do {
-      data = try client.read(url: inputURL)
+      data = try fixer.client.read(url: input)
     } catch {
-      throw EncodingError.cannotRead(inputURL)
+      throw EncodingError.cannotRead(input)
     }
 
-    guard let decoded = client.decodeCP1251(data) else {
-      reportIssue("Failed to decode file as Windows-1251: \(inputURL.path)")
-      throw EncodingError.notCP1251(inputURL)
+    guard let decoded = fixer.client.decodeCP1251(data) else {
+      reportIssue("Failed to decode file as Windows-1251: \(input.path)")
+      throw EncodingError.notCP1251(input)
     }
 
     do {
-      try client.write(data: Data(decoded.utf8), url: outputURL)
+      try fixer.client.write(data: Data(decoded.utf8), url: output)
     } catch {
-      throw EncodingError.cannotWrite(outputURL)
+      throw EncodingError.cannotWrite(output)
     }
   }
 }

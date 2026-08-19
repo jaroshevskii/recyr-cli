@@ -17,7 +17,7 @@ struct EncodingFixerTests {
     try withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      try EncodingFixer().fix(inputURL: input, outputURL: output)
+      try EncodingFixer.fix(input: input, output: output)
     }
 
     expectNoDifference(String(data: fs.storage[output]!, encoding: .utf8), Fixtures.utf8Text)
@@ -33,7 +33,7 @@ struct EncodingFixerTests {
     try withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      try EncodingFixer().fix(inputURL: input, outputURL: output)
+      try EncodingFixer.fix(input: input, output: output)
     }
 
     expectNoDifference(String(data: fs.storage[output]!, encoding: .utf8), Fixtures.utf8Text)
@@ -47,7 +47,7 @@ struct EncodingFixerTests {
     try withDependencies {
       $0.encodingClient = fs.client
     } operation: {
-      try EncodingFixer().fix(inputURL: input, outputURL: input)
+      try EncodingFixer.fix(input: input, output: input)
     }
 
     expectNoDifference(String(data: fs.storage[input]!, encoding: .utf8), Fixtures.utf8Text)
@@ -62,7 +62,7 @@ struct EncodingFixerTests {
       $0.encodingClient = fs.client
     } operation: {
       #expect(throws: EncodingError.cannotRead(input)) {
-        try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
+        try EncodingFixer.fix(input: input, output: URL(fileURLWithPath: "/out.txt"))
       }
     }
   }
@@ -81,7 +81,7 @@ struct EncodingFixerTests {
           $0.encodingClient = fs.client
         } operation: {
           _ = #expect(throws: EncodingError.notCP1251(input)) {
-            try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
+            try EncodingFixer.fix(input: input, output: URL(fileURLWithPath: "/out.txt"))
           }
         }
       }
@@ -98,7 +98,7 @@ struct EncodingFixerTests {
       $0.encodingClient = fs.client
     } operation: {
       #expect(throws: EncodingError.cannotWrite(URL(fileURLWithPath: "/out.txt"))) {
-        try EncodingFixer().fix(inputURL: input, outputURL: URL(fileURLWithPath: "/out.txt"))
+        try EncodingFixer.fix(input: input, output: URL(fileURLWithPath: "/out.txt"))
       }
     }
   }
@@ -116,7 +116,7 @@ struct EncodingFixerTests {
     try withDependencies {
       $0.encodingClient = .live
     } operation: {
-      try EncodingFixer().fix(inputURL: input, outputURL: output)
+      try EncodingFixer.fix(input: input, output: output)
     }
 
     let outputData = try Data(contentsOf: output)
