@@ -1,0 +1,31 @@
+Tests/RecyrCLITests/FixEncodingTests.swift
+  s_7fef19212c1f02::t_ec7e888c523176 23,33,37,46,50,63,75,78
+  s_7fef19212c1f02::t_2a6b599431d3a7 18
+  s_7fef19212c1f02::t_9fed7c136a74ea 26,40,54
+  s_7fef19212c1f02::t_eab46cfb7ccd1f 53,55-59
+Sources/RecyrCore/EncodingFixer.swift
+  s_7fef19212c1f02::t_651437be9c19aa 9,11-13,16,18,21-23,27,29
+Sources/RecyrCLI/FixEncoding.swift
+  s_7fef19212c1f02::t_3e365d29574e6d 5
+  s_7fef19212c1f02::t_7108824e377f17 30
+  s_7fef19212c1f02::t_80dcca4123fc85 25
+Tests/RecyrCoreTests/EncodingFixerTests.swift
+  s_7fef19212c1f02::t_25fd1fe0960ffa 50,65,84,101
+  s_7fef19212c1f02::t_f8c9400d2205e9 20,36,119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c391e31ca230dc38a236f03bae74fd791c27bf43",
+  "prompts": {},
+  "sessions": {
+    "s_7fef19212c1f02": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe948275effeinEyDCuEBYaL2X",
+        "model": "big-pickle"
+      },
+      "human_author": "Sasha Jaroshevskii 🦄 <72662383+jaroshevskii@users.noreply.github.com>"
+    }
+  }
+}
